@@ -1,0 +1,595 @@
+/* ==========================================================================
+   SIMRS Application Custom Theme System
+   Supports: Theme 1 (Hopewell Modern), Theme 2 (Hopewell Heritage), Dark Mode
+   ========================================================================== */
+
+:root,
+body.theme-1 {
+  --theme-primary: #16a34a;
+  --theme-primary-hover: #15803d;
+  --theme-primary-light: #dcfce7;
+  --theme-primary-rgb: 22, 163, 74;
+  --theme-secondary: #f59e0b;
+  --theme-secondary-light: #fef3c7;
+  --theme-accent: #ef4444;
+  --theme-bg: #f8fafc;
+  --theme-surface: #ffffff;
+  --theme-surface-subtle: #f1f5f9;
+  --theme-border: #e2e8f0;
+  --theme-text: #0f172a;
+  --theme-text-muted: #64748b;
+  --theme-font-head: 'Poppins', sans-serif;
+  --theme-font-body: 'Nunito Sans', sans-serif;
+  --theme-shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+  --theme-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+  --theme-shadow-lg: 0 20px 40px -12px rgba(22, 163, 74, 0.22);
+  --theme-radius: 16px;
+  --theme-radius-sm: 10px;
+  --theme-radius-pill: 9999px;
+  --theme-navbar-bg: rgba(255, 255, 255, 0.95);
+  --theme-table-header: #f8fafc;
+}
+
+body.theme-2 {
+  --theme-primary: #c4922b;
+  --theme-primary-hover: #9c6f1b;
+  --theme-primary-light: #fef3c7;
+  --theme-primary-rgb: 196, 146, 43;
+  --theme-secondary: #16241d;
+  --theme-secondary-light: #e6ede8;
+  --theme-accent: #b8472e;
+  --theme-bg: #f5f1e8;
+  --theme-surface: #ffffff;
+  --theme-surface-subtle: #ece5d6;
+  --theme-border: #dcd3be;
+  --theme-text: #16241d;
+  --theme-text-muted: #5b6960;
+  --theme-font-head: 'Fraunces', Georgia, serif;
+  --theme-font-body: 'Inter', sans-serif;
+  --theme-shadow-sm: 0 2px 8px rgba(22, 36, 29, 0.08);
+  --theme-shadow: 0 12px 30px -10px rgba(22, 36, 29, 0.16);
+  --theme-shadow-lg: 0 22px 45px -15px rgba(196, 146, 43, 0.3);
+  --theme-radius: 12px;
+  --theme-radius-sm: 8px;
+  --theme-radius-pill: 9999px;
+  --theme-navbar-bg: rgba(245, 241, 232, 0.96);
+  --theme-table-header: #eee7d7;
+}
+
+body.theme-dark {
+  --theme-primary: #10b981;
+  --theme-primary-hover: #059669;
+  --theme-primary-light: rgba(16, 185, 129, 0.18);
+  --theme-primary-rgb: 16, 185, 129;
+  --theme-secondary: #fbbf24;
+  --theme-secondary-light: rgba(251, 191, 36, 0.18);
+  --theme-accent: #f87171;
+  --theme-bg: #0b1120;
+  --theme-surface: #1e293b;
+  --theme-surface-subtle: #172033;
+  --theme-border: #334155;
+  --theme-text: #f8fafc;
+  --theme-text-muted: #94a3b8;
+  --theme-font-head: 'Poppins', sans-serif;
+  --theme-font-body: 'Nunito Sans', sans-serif;
+  --theme-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --theme-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.5);
+  --theme-shadow-lg: 0 22px 45px -12px rgba(16, 185, 129, 0.3);
+  --theme-radius: 16px;
+  --theme-radius-sm: 10px;
+  --theme-radius-pill: 9999px;
+  --theme-navbar-bg: rgba(30, 41, 59, 0.95);
+  --theme-table-header: #172033;
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+body {
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+  font-family: var(--theme-font-body);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--theme-font-head);
+  color: var(--theme-text);
+  font-weight: 700;
+}
+
+a {
+  color: var(--theme-primary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: var(--theme-primary-hover);
+}
+
+/* ==========================================================================
+   Navbar
+   ========================================================================== */
+.simrs-navbar {
+  background: var(--theme-navbar-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--theme-border);
+  padding: 14px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  box-shadow: var(--theme-shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.simrs-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-family: var(--theme-font-head);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--theme-text);
+}
+
+.simrs-brand-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--theme-radius-sm);
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-primary-hover));
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  box-shadow: 0 4px 12px rgba(var(--theme-primary-rgb), 0.35);
+}
+
+.simrs-brand-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.simrs-brand-title span.main-title {
+  font-size: 1.15rem;
+  letter-spacing: -0.3px;
+}
+
+.simrs-brand-title span.sub-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--theme-text-muted);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Theme Switcher & User Pill
+   ========================================================================== */
+.theme-selector-dropdown .dropdown-toggle::after {
+  margin-left: 0.5em;
+  vertical-align: middle;
+}
+
+.theme-pill-btn {
+  background: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+  color: var(--theme-text);
+  border-radius: var(--theme-radius-pill);
+  padding: 7px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--theme-shadow-sm);
+  transition: all 0.25s ease;
+}
+
+.theme-pill-btn:hover {
+  background: var(--theme-surface-subtle);
+  border-color: var(--theme-primary);
+  color: var(--theme-primary);
+}
+
+.user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 14px 5px 6px;
+  background: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-pill);
+  box-shadow: var(--theme-shadow-sm);
+}
+
+.user-avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn-simrs-primary {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-primary-hover));
+  color: #ffffff !important;
+  border: none;
+  border-radius: var(--theme-radius-sm);
+  padding: 10px 22px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(var(--theme-primary-rgb), 0.35);
+  transition: all 0.25s ease;
+}
+
+.btn-simrs-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(var(--theme-primary-rgb), 0.45);
+  color: #ffffff !important;
+}
+
+.btn-simrs-outline {
+  background: transparent;
+  color: var(--theme-primary) !important;
+  border: 1.5px solid var(--theme-primary);
+  border-radius: var(--theme-radius-sm);
+  padding: 9px 20px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+
+.btn-simrs-outline:hover {
+  background: var(--theme-primary-light);
+  border-color: var(--theme-primary);
+  color: var(--theme-primary-hover) !important;
+}
+
+.btn-simrs-danger {
+  background: #fee2e2;
+  color: #dc2626 !important;
+  border: 1px solid #fca5a5;
+  border-radius: var(--theme-radius-sm);
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.btn-simrs-danger:hover {
+  background: #dc2626;
+  color: #ffffff !important;
+  border-color: #dc2626;
+}
+
+/* ==========================================================================
+   Cards & Surfaces
+   ========================================================================== */
+.simrs-card {
+  background: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius);
+  box-shadow: var(--theme-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+
+.simrs-card-header {
+  padding: 20px 26px;
+  border-bottom: 1px solid var(--theme-border);
+  background: var(--theme-surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.simrs-card-body {
+  padding: 26px;
+}
+
+/* Stat Cards */
+.stat-card {
+  background: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius);
+  padding: 22px;
+  box-shadow: var(--theme-shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--theme-shadow);
+}
+
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--theme-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  flex-shrink: 0;
+}
+
+.stat-icon.green {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.stat-icon.blue {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.stat-icon.amber {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.stat-icon.purple {
+  background: #f3e8ff;
+  color: #9333ea;
+}
+
+.stat-info .stat-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.1;
+  font-family: var(--theme-font-head);
+  color: var(--theme-text);
+}
+
+.stat-info .stat-label {
+  font-size: 0.84rem;
+  color: var(--theme-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   Hero Banner
+   ========================================================================== */
+.hero-banner {
+  background: linear-gradient(135deg, rgba(var(--theme-primary-rgb), 0.12) 0%, rgba(var(--theme-primary-rgb), 0.03) 100%);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius);
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  bottom: -40px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(var(--theme-primary-rgb), 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Table Design
+   ========================================================================== */
+.simrs-table {
+  width: 100%;
+  margin-bottom: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.simrs-table thead th {
+  background-color: var(--theme-table-header);
+  color: var(--theme-text);
+  font-family: var(--theme-font-head);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  padding: 14px 18px;
+  border-bottom: 2px solid var(--theme-border);
+  border-top: none;
+  white-space: nowrap;
+}
+
+.simrs-table tbody td {
+  padding: 14px 18px;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--theme-border);
+  color: var(--theme-text);
+  font-size: 0.92rem;
+  background-color: transparent;
+}
+
+.simrs-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.simrs-table tbody tr:hover {
+  background-color: var(--theme-surface-subtle);
+}
+
+/* Badges */
+.badge-location {
+  background: var(--theme-primary-light);
+  color: var(--theme-primary);
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--theme-radius-pill);
+  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.badge-brand {
+  background: var(--theme-surface-subtle);
+  color: var(--theme-text);
+  border: 1px solid var(--theme-border);
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: var(--theme-radius-sm);
+  font-size: 0.8rem;
+}
+
+.badge-sn {
+  font-family: 'Space Mono', Consolas, monospace;
+  background: var(--theme-surface-subtle);
+  color: var(--theme-text-muted);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   Form Controls
+   ========================================================================== */
+.form-label-custom {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--theme-text);
+  margin-bottom: 7px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-control-custom,
+.form-select-custom {
+  background-color: var(--theme-surface);
+  border: 1.5px solid var(--theme-border);
+  color: var(--theme-text);
+  border-radius: var(--theme-radius-sm);
+  padding: 11px 16px;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+}
+
+.form-control-custom:focus,
+.form-select-custom:focus {
+  background-color: var(--theme-surface);
+  border-color: var(--theme-primary);
+  color: var(--theme-text);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(var(--theme-primary-rgb), 0.18);
+}
+
+.input-group-custom .input-group-text {
+  background-color: var(--theme-surface-subtle);
+  border: 1.5px solid var(--theme-border);
+  border-right: none;
+  color: var(--theme-text-muted);
+  border-radius: var(--theme-radius-sm) 0 0 var(--theme-radius-sm);
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.input-group-custom .form-control {
+  border-left: none;
+  border-radius: 0 var(--theme-radius-sm) var(--theme-radius-sm) 0;
+}
+
+.input-group-custom .form-control:focus {
+  border-color: var(--theme-border);
+  box-shadow: none;
+}
+
+.input-group-custom:focus-within {
+  box-shadow: 0 0 0 3px rgba(var(--theme-primary-rgb), 0.18);
+  border-radius: var(--theme-radius-sm);
+}
+
+.input-group-custom:focus-within .input-group-text,
+.input-group-custom:focus-within .form-control {
+  border-color: var(--theme-primary);
+}
+
+/* Auth Pages (Login & Register) */
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 15px;
+  background: radial-gradient(circle at top right, rgba(var(--theme-primary-rgb), 0.08), transparent 40%),
+              radial-gradient(circle at bottom left, rgba(var(--theme-secondary), 0.06), transparent 40%),
+              var(--theme-bg);
+}
+
+.auth-card {
+  max-width: 480px;
+  width: 100%;
+  background: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius);
+  box-shadow: var(--theme-shadow-lg);
+  overflow: hidden;
+}
+
+.auth-header {
+  padding: 36px 32px 24px;
+  text-align: center;
+  background: linear-gradient(180deg, var(--theme-surface-subtle) 0%, var(--theme-surface) 100%);
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.auth-body {
+  padding: 32px;
+}
+
+.auth-footer {
+  padding: 18px 32px;
+  background: var(--theme-surface-subtle);
+  border-top: 1px solid var(--theme-border);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.simrs-footer {
+  margin-top: auto;
+  background: var(--theme-surface);
+  border-top: 1px solid var(--theme-border);
+  padding: 22px 0;
+  font-size: 0.88rem;
+  color: var(--theme-text-muted);
+}
